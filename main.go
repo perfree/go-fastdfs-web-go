@@ -6,6 +6,7 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
+	"go-fastdfs-web-go/filter"
 	_ "go-fastdfs-web-go/routers"
 
 	_ "github.com/mattn/go-sqlite3"
@@ -18,7 +19,7 @@ func init() {
 }
 
 // log配置
-func initLogger()(err error) {
+func initLogger() (err error) {
 	config := make(map[string]interface{})
 	config["filename"] = beego.AppConfig.String("log_path")
 	// map 转 json
@@ -37,6 +38,11 @@ func main() {
 	_ = initLogger()
 	o := orm.NewOrm()
 	_ = o.Using("default")
+	beego.SetStaticPath("/images", "images")
+	beego.SetStaticPath("/css", "css")
+	beego.SetStaticPath("/js", "js")
+	beego.SetStaticPath("/plugins", "plugins")
+	// 注册路由过滤器
+	beego.InsertFilter("/*", beego.BeforeRouter, filter.CheckLogin)
 	beego.Run()
 }
-

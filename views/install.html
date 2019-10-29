@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>安装</title>
+<link rel="stylesheet" href="/static/css/install.css" media="all">
+<link rel="stylesheet" href="/static/plugins/layui/css/layui.css" media="all">
+<link rel="stylesheet" href="/static/plugins/layer/theme/default/layer.css" media="all">
+</head>
+<body class="install-bg">
+<div class="install">
+	<div class="message">GoFastDfs-Web管理平台安装</div>
+	<div id="darkbannerwrap"></div>
+	<form method="post" class="layui-form" action="/doInstall">
+		<input name="serverName" placeholder="集群名称"  type="text" lay-verify="required" class="layui-input" >
+		<span>如:集群1</span>
+		<input name="groupName" placeholder="组名称"  type="text" class="layui-input" >
+		<span>如:group1,未开启组支持请不要填写!</span>
+	    <input name="server" placeholder="当前集群服务地址"  type="text" lay-verify="required" class="layui-input" >
+	    <span>如:http://127.0.0.1:8080</span>
+		<input name="showAddress" placeholder="资源访问域名"  type="text" class="layui-input" >
+		<span>配置能访问到资源的域名,未做域名映射请不要填写!</span>
+	    <input name="name" lay-verify="required" placeholder="用户名"  type="text" class="layui-input">
+	    <input name="account" lay-verify="required" placeholder="登录账户"  type="text" class="layui-input">
+	    <input name="password" lay-verify="required" placeholder="登录密码"  type="password" class="layui-input">
+	    <input name="email" lay-verify="required" placeholder="邮箱"  type="text" class="layui-input">
+	    <input class="installin" value="安装" lay-submit lay-filter="install" style="width:100%;" type="submit">
+	</form>
+</div>
+
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/plugins/layer/layer.js"></script>
+<script src="/static/plugins/layui/layui.js"></script>
+<script type="text/javascript">
+layui.use(['form','jquery','layer'], function(){
+  var form = layui.form,$=layui.jquery,layer=layui.layer;
+  form.on('submit(install)', function(data){
+	  $.post("/doInstall",data.field,function(result){
+		 if(result.state == 200){
+			  location.href='/login';
+		 }else{
+			 layer.msg(result.msg);
+		 }
+	  });
+	  return false;
+  });
+});
+</script>
+</body>
+</html>

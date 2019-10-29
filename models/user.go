@@ -8,8 +8,12 @@ import (
 // 获取所有用户信息
 func GetUsers() (messages []User) {
 	o := orm.NewOrm()
-	_,err := o.Raw("SELECT * FROM `user`").QueryRows(&messages)
-	if err != nil{
+	/*	TotalCount,_:=o.QueryTable("user").Count()
+		fmt.Println(TotalCount)*/
+	_, err := o.QueryTable("user").RelatedSel().All(&messages)
+
+	//_,err := o.Raw("SELECT * FROM `t_user` t1 left join `t_peers` t2 on t1.peersId = t2.id").QueryRows(&messages)
+	if err != nil {
 		logs.Error(err.Error())
 	}
 	return messages

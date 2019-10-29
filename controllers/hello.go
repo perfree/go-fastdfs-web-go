@@ -12,7 +12,8 @@ type HelloController struct {
 func (c *HelloController) Get() {
 	users := models.GetUsers()
 	c.Data["json"] = &JsonData{Code: SUCCESS_CODE, Count: len(users), Msg: "获取数据成功", Data: users}
-	c.ServeJSON()
+	//c.ServeJSON()
+	c.TplName = "install.html"
 }
 
 // 获取所有用户信息
