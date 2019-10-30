@@ -43,6 +43,7 @@ func main() {
 	beego.SetStaticPath("/js", "js")
 	beego.SetStaticPath("/plugins", "plugins")
 	// 注册路由过滤器
+	beego.InsertFilter("/*", beego.BeforeRouter, filter.CheckInstall)
 	beego.InsertFilter("/*", beego.BeforeRouter, filter.CheckLogin)
 	beego.Run()
 }
