@@ -7,6 +7,8 @@ import (
 
 // 定义路由
 func init() {
-	beego.Router("/",&controllers.HelloController{})
-	beego.Router("/getUsers",&controllers.HelloController{},"get:GetUsers")
+	beego.Router("/install", &controllers.InstallController{})
+	beego.Router("/install/doInstall", &controllers.InstallController{}, "post:DoInstall")
+	beego.Router("/install/checkServer", &controllers.InstallController{}, "post:CheckServer")
+	beego.Router("/getUsers", &controllers.HelloController{}, "get:GetUsers")
 }

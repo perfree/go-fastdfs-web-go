@@ -18,7 +18,7 @@ type User struct {
 // 集群表
 type Peers struct {
 	Id            int
-	Name          string
+	ServerName    string
 	GroupName     string
 	ServerAddress string
 	ShowAddress   string

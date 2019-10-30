@@ -5,6 +5,13 @@ import (
 	"github.com/astaxie/beego/orm"
 )
 
+// 获取当前用户数
+func GetUsesTotal() (totalCount int64) {
+	o := orm.NewOrm()
+	totalCount, _ = o.QueryTable("user").Count()
+	return totalCount
+}
+
 // 获取所有用户信息
 func GetUsers() (messages []User) {
 	o := orm.NewOrm()

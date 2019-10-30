@@ -7,10 +7,10 @@ type BaseController struct {
 }
 
 // 结果响应状态码:成功
-const SUCCESS_CODE  = 0
+const SUCCESS_CODE = 0
 
 // 结果响应状态码:失败
-const SUCCESS_FAIL  = 1
+const FAIL_CODE = 1
 
 // 返回json列表 数据格式
 type JsonData struct {
