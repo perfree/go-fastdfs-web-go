@@ -60,7 +60,7 @@
                             <div class="layui-form-item">
                                 <label class="layui-form-label">用户名:</label>
                                 <div class="layui-input-block">
-                                    <input name="name" placeholder="用户名"  type="text" class="layui-input">
+                                    <input name="Name" placeholder="用户名"  type="text" class="layui-input">
                                 </div>
                             </div>
                             <div class="layui-form-item">
@@ -78,7 +78,7 @@
                             <div class="layui-form-item">
                                 <label class="layui-form-label">邮箱:</label>
                                 <div class="layui-input-block">
-                                    <input name="email"  placeholder="邮箱"  type="text" class="layui-input">
+                                    <input name="Email"  placeholder="邮箱"  type="text" class="layui-input">
                                 </div>
                             </div>
                             <div class="layui-form-item">
@@ -108,11 +108,13 @@
             </div>
             <hr>
             <div style="color: #666;margin-top: 30px;margin-bottom: 40px;padding-left: 30px;">
-                <h3>说明</h3><br>
-                <h4>入款到保险箱</h4>
-                <p>如果需要，这里可以放一些关于产品的常见问题说明。</p>
-                <br><h4>入款到现金</h4>
-                <p>如果需要，这里可以放一些关于产品的常见问题说明。</p>
+                <h3>提示</h3><br>
+                <h4>组名称</h4>
+                <p>当go-fastdfs开启按组管理时,需要填写组名称,这里请确保和go-fastdfs配置文件中的组名称保持一致</p>
+                <br> <h4>管理地址</h4>
+                <p>管理地址即为go-fastdfs配置我呢见中配置的管理IP,如遇到连接失败等问题,请检查go-fastdfs配置文件中的管理ip是否和您填写的一致</p>
+                <br> <h4>其他问题</h4>
+                <p>如遇到安装失败提示服务错误等情况,请预先手动调用一下go-fastdfs的接口,看是否能成功</p>
             </div>
         </div>
     </div>
@@ -150,6 +152,7 @@
             peersFormValue = data.field;
             const index = layer.load();
             $.post("/install/checkServer",peersFormValue,function(result){
+                console.log(result);
                 if(result.code === 0){
                     layer.close(index);
                     step.next('#stepForm');
@@ -162,7 +165,7 @@
         });
 
         form.on('submit(formStep2)', function (data) {
-            $.post("/doInstall",$.extend({}, peersFormValue,data.field),function(result){
+            $.post("/install/doInstall",$.extend({}, peersFormValue,data.field),function(result){
                 if(result.state === 200){
                     location.href='/login';
                 }else{

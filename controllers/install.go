@@ -77,12 +77,12 @@ func (c *InstallController) CheckServer() {
 
 // 安装
 func (c *InstallController) DoInstall() {
-	// TODO 安装处理
 	u := models.User{}
 	if err := c.ParseForm(&u); err != nil {
 		//handle error
 	}
-	fmt.Println(u.Peers.ServerName)
+	fmt.Println(u.Name)
+	fmt.Println(u.Account)
 	fmt.Println(u.Password)
 	c.ServeJSON()
 }
