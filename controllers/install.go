@@ -3,7 +3,6 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
-	"go-fastdfs-web-go/common"
 	"go-fastdfs-web-go/models"
 	"io/ioutil"
 	"net/http"

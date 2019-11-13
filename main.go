@@ -6,10 +6,8 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
-	"go-fastdfs-web-go/filter"
-	_ "go-fastdfs-web-go/routers"
-
 	_ "github.com/mattn/go-sqlite3"
+	"go-fastdfs-web-go/filter"
 )
 
 func init() {
