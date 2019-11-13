@@ -4,14 +4,19 @@
 
 ## 开发环境
 
-1. GoVersion ： 1.12.9
+1. GoVersion ： 1.13.4
 2. Beego ： 1.12.0
 3. sqlite ： 3
 
 ## 运行
 
 ```bash
-bee run
+# 下载依赖
+go mod download
+# 将依赖复制到vendor下
+go mod vendor
+# 运行
+bee run 或者直接运行main.go
 ```
 
 默认端口8080
