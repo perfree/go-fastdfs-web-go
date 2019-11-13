@@ -17,6 +17,9 @@ go mod download
 go mod vendor
 # 运行
 bee run 或者直接运行main.go
-```
-
 默认端口8080
+```
+如依赖下载失败则设置下代理:
+```bash
+go env -w GOPROXY=https://goproxy.io
+```
