@@ -8,16 +8,16 @@
 2. Beego ： 1.12.0
 3. sqlite ： 3
 
-## 运行
+## 开发步骤
 
 ```bash
+# 下载源码
+git clone https://github.com/perfree/go-fastdfs-web-go.git --depth 1
 # 下载依赖
 go mod download
-# 将依赖复制到vendor下
-go mod vendor
 # 运行
-bee run 或者直接运行main.go
-默认端口8080
+bee run # 或者直接运行main.go
+# 默认端口8080
 ```
 如依赖下载失败则设置下代理:
 ```bash
