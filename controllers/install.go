@@ -1,13 +1,17 @@
 package controllers
 
 import (
+	"crypto/md5"
+	"encoding/hex"
 	"encoding/json"
-	"fmt"
+	_ "github.com/satori/go.uuid"
+	uuid "github.com/satori/go.uuid"
 	"go-fastdfs-web-go/common"
 	"go-fastdfs-web-go/models"
 	"io/ioutil"
 	"net/http"
 	"regexp"
+	"strings"
 )
 
 type InstallController struct {
@@ -77,12 +81,29 @@ func (c *InstallController) CheckServer() {
 
 // 安装
 func (c *InstallController) DoInstall() {
-	u := models.User{}
-	if err := c.ParseForm(&u); err != nil {
-		//handle error
+	user := models.User{}
+	if err := c.ParseForm(&user); err != nil {
+		c.Data["json"] = &JsonData{Code: FAIL_CODE, Count: 0, Msg: "参数解析失败", Data: nil}
+		c.ServeJSON()
+		return
 	}
-	fmt.Println(u.Name)
-	fmt.Println(u.Account)
-	fmt.Println(u.Password)
+	peers := models.Peers{}
+	if err := c.ParseForm(&peers); err != nil {
+		c.Data["json"] = &JsonData{Code: FAIL_CODE, Count: 0, Msg: "参数解析失败", Data: nil}
+		c.ServeJSON()
+		return
+	}
+	id := models.SavePeer(peers)
+	peers.Id = id
+	user.Peers = &peers
+	md5 := md5.New()
+	uid := strings.ReplaceAll(uuid.NewV4().String(), "-", "")
+	md5.Write([]byte(user.Password))
+	md5.Write([]byte(uid))
+	st := md5.Sum(nil)
+	user.Password = hex.EncodeToString(st)
+	user.CredentialsSalt = uid
+	models.SaveUser(user)
+	c.Data["json"] = &JsonData{Code: SUCCESS_CODE, Count: 0, Msg: "安装成功", Data: nil}
 	c.ServeJSON()
 }

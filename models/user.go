@@ -1,6 +1,7 @@
 package models
 
 import (
+	"fmt"
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
 )
@@ -24,4 +25,14 @@ func GetUsers() (messages []User) {
 		logs.Error(err.Error())
 	}
 	return messages
+}
+
+// 保存用户
+func SaveUser(user User) int64 {
+	o := orm.NewOrm()
+	id, err := o.Insert(&user)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	return id
 }

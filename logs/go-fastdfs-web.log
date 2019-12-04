@@ -1,0 +1,171 @@
+2019/12/04 14:26:29.861 [C] [panic.go:679]  the request url is  /install/doInstall
+2019/12/04 14:26:29.862 [C] [panic.go:679]  Handler crashed with error <Ormer> cannot use non-ptr model struct `go-fastdfs-web-go/models.Peers`
+2019/12/04 14:26:29.862 [C] [panic.go:679]  C:/Go/src/runtime/panic.go:679
+2019/12/04 14:26:29.862 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/vendor/github.com/astaxie/beego/orm/orm.go:108
+2019/12/04 14:26:29.862 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/vendor/github.com/astaxie/beego/orm/orm.go:163
+2019/12/04 14:26:29.863 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/models/peers.go:11
+2019/12/04 14:26:29.863 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/controllers/install.go:99
+2019/12/04 14:26:29.863 [C] [panic.go:679]  C:/Go/src/reflect/value.go:460
+2019/12/04 14:26:29.864 [C] [panic.go:679]  C:/Go/src/reflect/value.go:321
+2019/12/04 14:26:29.864 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/vendor/github.com/astaxie/beego/router.go:853
+2019/12/04 14:26:29.864 [C] [panic.go:679]  C:/Go/src/net/http/server.go:2802
+2019/12/04 14:26:29.864 [C] [panic.go:679]  C:/Go/src/net/http/server.go:1890
+2019/12/04 14:26:29.865 [C] [panic.go:679]  C:/Go/src/runtime/asm_amd64.s:1357
+2019/12/04 14:26:29.865 [server.go:3053]  [HTTP] http: superfluous response.WriteHeader call from github.com/astaxie/beego/context.(*Response).WriteHeader (context.go:230)
+2019/12/04 14:42:04.086 [C] [panic.go:679]  the request url is  /install/doInstall
+2019/12/04 14:42:04.086 [C] [panic.go:679]  Handler crashed with error <Ormer> cannot use non-ptr model struct `go-fastdfs-web-go/models.Peers`
+2019/12/04 14:42:04.087 [C] [panic.go:679]  C:/Go/src/runtime/panic.go:679
+2019/12/04 14:42:04.087 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/vendor/github.com/astaxie/beego/orm/orm.go:108
+2019/12/04 14:42:04.087 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/vendor/github.com/astaxie/beego/orm/orm.go:163
+2019/12/04 14:42:04.087 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/models/peers.go:11
+2019/12/04 14:42:04.088 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/controllers/install.go:99
+2019/12/04 14:42:04.088 [C] [panic.go:679]  C:/Go/src/reflect/value.go:460
+2019/12/04 14:42:04.088 [C] [panic.go:679]  C:/Go/src/reflect/value.go:321
+2019/12/04 14:42:04.088 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/vendor/github.com/astaxie/beego/router.go:853
+2019/12/04 14:42:04.089 [C] [panic.go:679]  C:/Go/src/net/http/server.go:2802
+2019/12/04 14:42:04.089 [C] [panic.go:679]  C:/Go/src/net/http/server.go:1890
+2019/12/04 14:42:04.089 [C] [panic.go:679]  C:/Go/src/runtime/asm_amd64.s:1357
+2019/12/04 14:42:04.090 [server.go:3053]  [HTTP] http: superfluous response.WriteHeader call from github.com/astaxie/beego/context.(*Response).WriteHeader (context.go:230)
+2019/12/04 15:12:53.051 [C] [panic.go:679]  the request url is  /install/doInstall
+2019/12/04 15:12:53.051 [C] [panic.go:679]  Handler crashed with error runtime error: invalid memory address or nil pointer dereference
+2019/12/04 15:12:53.052 [C] [panic.go:679]  C:/Go/src/runtime/panic.go:679
+2019/12/04 15:12:53.052 [C] [panic.go:679]  C:/Go/src/runtime/panic.go:199
+2019/12/04 15:12:53.052 [C] [panic.go:679]  C:/Go/src/runtime/signal_windows.go:233
+2019/12/04 15:12:53.052 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/controllers/install.go:94
+2019/12/04 15:12:53.053 [C] [panic.go:679]  C:/Go/src/reflect/value.go:460
+2019/12/04 15:12:53.053 [C] [panic.go:679]  C:/Go/src/reflect/value.go:321
+2019/12/04 15:12:53.053 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/vendor/github.com/astaxie/beego/router.go:853
+2019/12/04 15:12:53.053 [C] [panic.go:679]  C:/Go/src/net/http/server.go:2802
+2019/12/04 15:12:53.054 [C] [panic.go:679]  C:/Go/src/net/http/server.go:1890
+2019/12/04 15:12:53.054 [C] [panic.go:679]  C:/Go/src/runtime/asm_amd64.s:1357
+2019/12/04 15:12:53.054 [server.go:3053]  [HTTP] http: superfluous response.WriteHeader call from github.com/astaxie/beego/context.(*Response).WriteHeader (context.go:230)
+2019/12/04 15:16:30.733 [C] [panic.go:679]  the request url is  /install/doInstall
+2019/12/04 15:16:30.734 [C] [panic.go:679]  Handler crashed with error runtime error: invalid memory address or nil pointer dereference
+2019/12/04 15:16:30.734 [C] [panic.go:679]  C:/Go/src/runtime/panic.go:679
+2019/12/04 15:16:30.734 [C] [panic.go:679]  C:/Go/src/runtime/panic.go:199
+2019/12/04 15:16:30.734 [C] [panic.go:679]  C:/Go/src/runtime/signal_windows.go:233
+2019/12/04 15:16:30.734 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/controllers/install.go:94
+2019/12/04 15:16:30.735 [C] [panic.go:679]  C:/Go/src/reflect/value.go:460
+2019/12/04 15:16:30.735 [C] [panic.go:679]  C:/Go/src/reflect/value.go:321
+2019/12/04 15:16:30.735 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/vendor/github.com/astaxie/beego/router.go:853
+2019/12/04 15:16:30.735 [C] [panic.go:679]  C:/Go/src/net/http/server.go:2802
+2019/12/04 15:16:30.735 [C] [panic.go:679]  C:/Go/src/net/http/server.go:1890
+2019/12/04 15:16:30.736 [C] [panic.go:679]  C:/Go/src/runtime/asm_amd64.s:1357
+2019/12/04 15:16:30.736 [server.go:3053]  [HTTP] http: superfluous response.WriteHeader call from github.com/astaxie/beego/context.(*Response).WriteHeader (context.go:230)
+2019/12/04 15:20:17.881 [C] [panic.go:679]  the request url is  /install/doInstall
+2019/12/04 15:20:17.882 [C] [panic.go:679]  Handler crashed with error runtime error: invalid memory address or nil pointer dereference
+2019/12/04 15:20:17.883 [C] [panic.go:679]  C:/Go/src/runtime/panic.go:679
+2019/12/04 15:20:17.883 [C] [panic.go:679]  C:/Go/src/runtime/panic.go:199
+2019/12/04 15:20:17.883 [C] [panic.go:679]  C:/Go/src/runtime/signal_windows.go:233
+2019/12/04 15:20:17.883 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/controllers/install.go:94
+2019/12/04 15:20:17.883 [C] [panic.go:679]  C:/Go/src/reflect/value.go:460
+2019/12/04 15:20:17.884 [C] [panic.go:679]  C:/Go/src/reflect/value.go:321
+2019/12/04 15:20:17.884 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/vendor/github.com/astaxie/beego/router.go:853
+2019/12/04 15:20:17.884 [C] [panic.go:679]  C:/Go/src/net/http/server.go:2802
+2019/12/04 15:20:17.884 [C] [panic.go:679]  C:/Go/src/net/http/server.go:1890
+2019/12/04 15:20:17.884 [C] [panic.go:679]  C:/Go/src/runtime/asm_amd64.s:1357
+2019/12/04 15:20:17.885 [server.go:3053]  [HTTP] http: superfluous response.WriteHeader call from github.com/astaxie/beego/context.(*Response).WriteHeader (context.go:230)
+2019/12/04 15:34:25.246 [C] [panic.go:679]  the request url is  /install/doInstall
+2019/12/04 15:34:25.246 [C] [panic.go:679]  Handler crashed with error runtime error: invalid memory address or nil pointer dereference
+2019/12/04 15:34:25.247 [C] [panic.go:679]  C:/Go/src/runtime/panic.go:679
+2019/12/04 15:34:25.247 [C] [panic.go:679]  C:/Go/src/runtime/panic.go:199
+2019/12/04 15:34:25.247 [C] [panic.go:679]  C:/Go/src/runtime/signal_windows.go:233
+2019/12/04 15:34:25.247 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/controllers/install.go:94
+2019/12/04 15:34:25.248 [C] [panic.go:679]  C:/Go/src/reflect/value.go:460
+2019/12/04 15:34:25.248 [C] [panic.go:679]  C:/Go/src/reflect/value.go:321
+2019/12/04 15:34:25.248 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/vendor/github.com/astaxie/beego/router.go:853
+2019/12/04 15:34:25.249 [C] [panic.go:679]  C:/Go/src/net/http/server.go:2802
+2019/12/04 15:34:25.249 [C] [panic.go:679]  C:/Go/src/net/http/server.go:1890
+2019/12/04 15:34:25.249 [C] [panic.go:679]  C:/Go/src/runtime/asm_amd64.s:1357
+2019/12/04 15:34:25.250 [server.go:3053]  [HTTP] http: superfluous response.WriteHeader call from github.com/astaxie/beego/context.(*Response).WriteHeader (context.go:230)
+2019/12/04 15:37:07.472 [C] [panic.go:679]  the request url is  /install/doInstall
+2019/12/04 15:37:07.473 [C] [panic.go:679]  Handler crashed with error runtime error: invalid memory address or nil pointer dereference
+2019/12/04 15:37:07.473 [C] [panic.go:679]  C:/Go/src/runtime/panic.go:679
+2019/12/04 15:37:07.473 [C] [panic.go:679]  C:/Go/src/runtime/panic.go:199
+2019/12/04 15:37:07.474 [C] [panic.go:679]  C:/Go/src/runtime/signal_windows.go:233
+2019/12/04 15:37:07.474 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/controllers/install.go:89
+2019/12/04 15:37:07.474 [C] [panic.go:679]  C:/Go/src/reflect/value.go:460
+2019/12/04 15:37:07.475 [C] [panic.go:679]  C:/Go/src/reflect/value.go:321
+2019/12/04 15:37:07.475 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/vendor/github.com/astaxie/beego/router.go:853
+2019/12/04 15:37:07.475 [C] [panic.go:679]  C:/Go/src/net/http/server.go:2802
+2019/12/04 15:37:07.476 [C] [panic.go:679]  C:/Go/src/net/http/server.go:1890
+2019/12/04 15:37:07.476 [C] [panic.go:679]  C:/Go/src/runtime/asm_amd64.s:1357
+2019/12/04 15:37:07.476 [server.go:3053]  [HTTP] http: superfluous response.WriteHeader call from github.com/astaxie/beego/context.(*Response).WriteHeader (context.go:230)
+2019/12/04 15:38:24.448 [C] [panic.go:679]  the request url is  /install/doInstall
+2019/12/04 15:38:24.448 [C] [panic.go:679]  Handler crashed with error runtime error: invalid memory address or nil pointer dereference
+2019/12/04 15:38:24.449 [C] [panic.go:679]  C:/Go/src/runtime/panic.go:679
+2019/12/04 15:38:24.449 [C] [panic.go:679]  C:/Go/src/runtime/panic.go:199
+2019/12/04 15:38:24.449 [C] [panic.go:679]  C:/Go/src/runtime/signal_windows.go:233
+2019/12/04 15:38:24.450 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/controllers/install.go:90
+2019/12/04 15:38:24.450 [C] [panic.go:679]  C:/Go/src/reflect/value.go:460
+2019/12/04 15:38:24.450 [C] [panic.go:679]  C:/Go/src/reflect/value.go:321
+2019/12/04 15:38:24.450 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/vendor/github.com/astaxie/beego/router.go:853
+2019/12/04 15:38:24.451 [C] [panic.go:679]  C:/Go/src/net/http/server.go:2802
+2019/12/04 15:38:24.451 [C] [panic.go:679]  C:/Go/src/net/http/server.go:1890
+2019/12/04 15:38:24.451 [C] [panic.go:679]  C:/Go/src/runtime/asm_amd64.s:1357
+2019/12/04 15:38:24.452 [server.go:3053]  [HTTP] http: superfluous response.WriteHeader call from github.com/astaxie/beego/context.(*Response).WriteHeader (context.go:230)
+2019/12/04 15:43:31.194 [C] [panic.go:679]  the request url is  /install/doInstall
+2019/12/04 15:43:31.195 [C] [panic.go:679]  Handler crashed with error runtime error: invalid memory address or nil pointer dereference
+2019/12/04 15:43:31.197 [C] [panic.go:679]  C:/Go/src/runtime/panic.go:679
+2019/12/04 15:43:31.197 [C] [panic.go:679]  C:/Go/src/runtime/panic.go:199
+2019/12/04 15:43:31.197 [C] [panic.go:679]  C:/Go/src/runtime/signal_windows.go:233
+2019/12/04 15:43:31.197 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/controllers/install.go:90
+2019/12/04 15:43:31.198 [C] [panic.go:679]  C:/Go/src/reflect/value.go:460
+2019/12/04 15:43:31.198 [C] [panic.go:679]  C:/Go/src/reflect/value.go:321
+2019/12/04 15:43:31.198 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/vendor/github.com/astaxie/beego/router.go:853
+2019/12/04 15:43:31.199 [C] [panic.go:679]  C:/Go/src/net/http/server.go:2802
+2019/12/04 15:43:31.199 [C] [panic.go:679]  C:/Go/src/net/http/server.go:1890
+2019/12/04 15:43:31.199 [C] [panic.go:679]  C:/Go/src/runtime/asm_amd64.s:1357
+2019/12/04 15:43:31.199 [server.go:3053]  [HTTP] http: superfluous response.WriteHeader call from github.com/astaxie/beego/context.(*Response).WriteHeader (context.go:230)
+2019/12/04 15:44:16.929 [C] [panic.go:679]  the request url is  /install/doInstall
+2019/12/04 15:44:16.929 [C] [panic.go:679]  Handler crashed with error runtime error: invalid memory address or nil pointer dereference
+2019/12/04 15:44:16.930 [C] [panic.go:679]  C:/Go/src/runtime/panic.go:679
+2019/12/04 15:44:16.930 [C] [panic.go:679]  C:/Go/src/runtime/panic.go:199
+2019/12/04 15:44:16.930 [C] [panic.go:679]  C:/Go/src/runtime/signal_windows.go:233
+2019/12/04 15:44:16.930 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/controllers/install.go:90
+2019/12/04 15:44:16.931 [C] [panic.go:679]  C:/Go/src/reflect/value.go:460
+2019/12/04 15:44:16.931 [C] [panic.go:679]  C:/Go/src/reflect/value.go:321
+2019/12/04 15:44:16.931 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/vendor/github.com/astaxie/beego/router.go:853
+2019/12/04 15:44:16.931 [C] [panic.go:679]  C:/Go/src/net/http/server.go:2802
+2019/12/04 15:44:16.932 [C] [panic.go:679]  C:/Go/src/net/http/server.go:1890
+2019/12/04 15:44:16.932 [C] [panic.go:679]  C:/Go/src/runtime/asm_amd64.s:1357
+2019/12/04 15:44:16.932 [server.go:3053]  [HTTP] http: superfluous response.WriteHeader call from github.com/astaxie/beego/context.(*Response).WriteHeader (context.go:230)
+2019/12/04 15:48:15.193 [C] [panic.go:679]  the request url is  /install/doInstall
+2019/12/04 15:48:15.194 [C] [panic.go:679]  Handler crashed with error runtime error: invalid memory address or nil pointer dereference
+2019/12/04 15:48:15.194 [C] [panic.go:679]  C:/Go/src/runtime/panic.go:679
+2019/12/04 15:48:15.195 [C] [panic.go:679]  C:/Go/src/runtime/panic.go:199
+2019/12/04 15:48:15.195 [C] [panic.go:679]  C:/Go/src/runtime/signal_windows.go:233
+2019/12/04 15:48:15.195 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/controllers/install.go:89
+2019/12/04 15:48:15.195 [C] [panic.go:679]  C:/Go/src/reflect/value.go:460
+2019/12/04 15:48:15.196 [C] [panic.go:679]  C:/Go/src/reflect/value.go:321
+2019/12/04 15:48:15.196 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/vendor/github.com/astaxie/beego/router.go:853
+2019/12/04 15:48:15.196 [C] [panic.go:679]  C:/Go/src/net/http/server.go:2802
+2019/12/04 15:48:15.197 [C] [panic.go:679]  C:/Go/src/net/http/server.go:1890
+2019/12/04 15:48:15.197 [C] [panic.go:679]  C:/Go/src/runtime/asm_amd64.s:1357
+2019/12/04 15:48:15.197 [server.go:3053]  [HTTP] http: superfluous response.WriteHeader call from github.com/astaxie/beego/context.(*Response).WriteHeader (context.go:230)
+2019/12/04 15:49:54.962 [C] [panic.go:679]  the request url is  /install/doInstall
+2019/12/04 15:49:54.962 [C] [panic.go:679]  Handler crashed with error runtime error: invalid memory address or nil pointer dereference
+2019/12/04 15:49:54.964 [C] [panic.go:679]  C:/Go/src/runtime/panic.go:679
+2019/12/04 15:49:54.964 [C] [panic.go:679]  C:/Go/src/runtime/panic.go:199
+2019/12/04 15:49:54.964 [C] [panic.go:679]  C:/Go/src/runtime/signal_windows.go:233
+2019/12/04 15:49:54.964 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/controllers/install.go:89
+2019/12/04 15:49:54.965 [C] [panic.go:679]  C:/Go/src/reflect/value.go:460
+2019/12/04 15:49:54.965 [C] [panic.go:679]  C:/Go/src/reflect/value.go:321
+2019/12/04 15:49:54.965 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/vendor/github.com/astaxie/beego/router.go:853
+2019/12/04 15:49:54.965 [C] [panic.go:679]  C:/Go/src/net/http/server.go:2802
+2019/12/04 15:49:54.966 [C] [panic.go:679]  C:/Go/src/net/http/server.go:1890
+2019/12/04 15:49:54.966 [C] [panic.go:679]  C:/Go/src/runtime/asm_amd64.s:1357
+2019/12/04 15:49:54.967 [server.go:3053]  [HTTP] http: superfluous response.WriteHeader call from github.com/astaxie/beego/context.(*Response).WriteHeader (context.go:230)
+2019/12/04 15:53:26.629 [C] [panic.go:679]  the request url is  /install/doInstall
+2019/12/04 15:53:26.630 [C] [panic.go:679]  Handler crashed with error runtime error: invalid memory address or nil pointer dereference
+2019/12/04 15:53:26.630 [C] [panic.go:679]  C:/Go/src/runtime/panic.go:679
+2019/12/04 15:53:26.630 [C] [panic.go:679]  C:/Go/src/runtime/panic.go:199
+2019/12/04 15:53:26.631 [C] [panic.go:679]  C:/Go/src/runtime/signal_windows.go:233
+2019/12/04 15:53:26.631 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/controllers/install.go:95
+2019/12/04 15:53:26.631 [C] [panic.go:679]  C:/Go/src/reflect/value.go:460
+2019/12/04 15:53:26.631 [C] [panic.go:679]  C:/Go/src/reflect/value.go:321
+2019/12/04 15:53:26.631 [C] [panic.go:679]  F:/golang/src/go-fastdfs-web-go/vendor/github.com/astaxie/beego/router.go:853
+2019/12/04 15:53:26.632 [C] [panic.go:679]  C:/Go/src/net/http/server.go:2802
+2019/12/04 15:53:26.632 [C] [panic.go:679]  C:/Go/src/net/http/server.go:1890
+2019/12/04 15:53:26.632 [C] [panic.go:679]  C:/Go/src/runtime/asm_amd64.s:1357
+2019/12/04 15:53:26.633 [server.go:3053]  [HTTP] http: superfluous response.WriteHeader call from github.com/astaxie/beego/context.(*Response).WriteHeader (context.go:230)
