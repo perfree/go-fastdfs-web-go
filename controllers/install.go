@@ -1,109 +1,145 @@
 package controllers
 
 import (
-	"crypto/md5"
-	"encoding/hex"
 	"encoding/json"
-	_ "github.com/satori/go.uuid"
-	uuid "github.com/satori/go.uuid"
-	"go-fastdfs-web-go/common"
+	"github.com/astaxie/beego/logs"
+	"github.com/astaxie/beego/validation"
+	"go-fastdfs-web-go/commons"
+	"go-fastdfs-web-go/form"
 	"go-fastdfs-web-go/models"
-	"io/ioutil"
-	"net/http"
+	"net/url"
 	"regexp"
-	"strings"
 )
+
+var httpUtil = commons.HttpUtil{}
 
 type InstallController struct {
 	BaseController
 }
 
-// 安装页
+// Get 安装页
 func (c *InstallController) Get() {
-	// 如存在用户,证明已安装过,直接跳转
-	if models.GetUsesTotal() >= 1 {
-		c.Redirect("/", 301)
-	} else {
-		c.TplName = "install.html"
-	}
+	c.TplName = "install.tpl"
 }
 
-// 检查集群配置
-func (c *InstallController) CheckServer() {
-	peers := models.Peers{}
-	if err := c.ParseForm(&peers); err != nil {
-		c.Data["json"] = &JsonData{Code: FAIL_CODE, Count: 0, Msg: "参数解析失败", Data: nil}
-		c.ServeJSON()
-		return
-	}
-	if models.GetUsesTotal() >= 1 {
-		c.Data["json"] = &JsonData{Code: FAIL_CODE, Count: 0, Msg: "您已安装,请直接登录", Data: nil}
-		c.ServeJSON()
-		return
-	}
-	if len(peers.ServerName) == 0 || len(peers.ServerName) > 100 {
-		c.Data["json"] = &JsonData{Code: FAIL_CODE, Count: 0, Msg: "请正确填写集群名称(100字符以内)", Data: nil}
-		c.ServeJSON()
-		return
-	}
-	if len(peers.ServerAddress) == 0 || len(peers.ServerAddress) > 100 {
-		c.Data["json"] = &JsonData{Code: FAIL_CODE, Count: 0, Msg: "请正确填写管理地址(100字符以内)", Data: nil}
-		c.ServeJSON()
-		return
-	}
-	match, _ := regexp.MatchString("[a-zA-z]+://[^\\s]*", peers.ServerAddress)
-	if !match {
-		c.Data["json"] = &JsonData{Code: FAIL_CODE, Count: 0, Msg: "管理地址格式不正确", Data: nil}
-		c.ServeJSON()
-		return
-	}
-	var urlPath = peers.ServerAddress
-	if len(peers.GroupName) > 0 {
-		urlPath += "/" + peers.GroupName
-	}
-	resp, err := http.Get(urlPath + common.STAT)
+// CheckLocalServer 检查本机是否安装goFastDfs
+func (c *InstallController) CheckLocalServer() {
+	postValue := url.Values{"action": {"get"}}
+	result, err := httpUtil.PostForm("http://127.0.0.1:8080/group1"+commons.ApiReload, postValue)
 	if err != nil {
-		c.Data["json"] = &JsonData{Code: FAIL_CODE, Count: 0, Msg: "连接go-fastdfs服务失败!请检查管理地址是否已配置白名单!", Data: nil}
-		c.ServeJSON()
-		return
+		result, err = httpUtil.PostForm("http://127.0.0.1:8080"+commons.ApiReload, postValue)
 	}
-	body, err := ioutil.ReadAll(resp.Body)
-	var tmp map[string]interface{}
-	_ = json.Unmarshal([]byte(string(body)), &tmp)
-	if tmp["status"] != "ok" {
-		c.Data["json"] = &JsonData{Code: FAIL_CODE, Count: 0, Msg: "连接go-fastdfs服务失败!请检查管理地址是否已配置白名单!", Data: nil}
-		c.ServeJSON()
-		return
+
+	if err != nil {
+		logs.Error("check -> ", err)
+		c.ErrorJson(500, "error", nil)
 	}
-	c.Data["json"] = &JsonData{Code: SUCCESS_CODE, Count: 0, Msg: "检查通过", Data: nil}
-	c.ServeJSON()
+
+	var resultMap map[string]interface{}
+	err = json.Unmarshal([]byte(result), &resultMap)
+	if err != nil {
+		logs.Error("check json exception -> ", err)
+		c.ErrorJson(500, "error", nil)
+	}
+	logs.Info("check result -> ", resultMap)
+
+	if resultMap["status"] == commons.ApiStatusSuccess {
+		c.SuccessJson(resultMap)
+	}
+	c.ErrorJson(500, "error", nil)
 }
 
-// 安装
+// CheckServer 校验Server
+func (c *InstallController) CheckServer() {
+	var peers models.Peers
+	err := c.ParseForm(&peers)
+	if err != nil {
+		c.ErrorJson(500, "param error", nil)
+	}
+	valid := validation.Validation{}
+	valid.Required(peers.Name, "Name").Message("集群名称不能为空且在50字以内")
+	valid.MaxSize(peers.Name, 50, "NameMax").Message("集群名称不能为空且在50字以内")
+
+	valid.MaxSize(peers.GroupName, 50, "GroupNameMax").Message("组名称应在50字以内")
+
+	valid.Required(peers.ServerAddress, "ServerAddress").Message("集群服务地址不能为空且在100字以内")
+	valid.MaxSize(peers.ServerAddress, 100, "ServerAddressMax").Message("集群服务地址不能为空且在100字以内")
+
+	valid.MaxSize(peers.ShowAddress, 100, "ShowAddressMax").Message("访问域名应在50字以内")
+
+	urlRegexp := regexp.MustCompile(`(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?`)
+	valid.Match(peers.ServerAddress, urlRegexp, "ServerAddressUrl").Message("请正确填写集群服务地址")
+
+	if peers.ShowAddress != "" {
+		valid.Match(peers.ShowAddress, urlRegexp, "ShowAddressUrl").Message("请正确填写访问域名")
+	}
+
+	if valid.HasErrors() {
+		for _, err := range valid.Errors {
+			logs.Error(err.Key, err.Message)
+			c.ErrorJson(500, err.Message, nil)
+		}
+	}
+
+	// 拼装url
+	path := peers.ServerAddress
+	if peers.GroupName != "" {
+		path += "/" + peers.GroupName
+	}
+	path += commons.ApiStatus
+	logs.Info("CheckServer url -> ", path)
+
+	// 测试连接GoFastDfs
+	result, err := httpUtil.PostForm(path, nil)
+	if err != nil {
+		logs.Error("CheckServer -> ", err)
+		c.ErrorJson(500, "连接GoFastDfs服务失败!请检查服务地址是否正确,以及是否配置白名单!", nil)
+	}
+
+	var resultMap map[string]interface{}
+	err = json.Unmarshal([]byte(result), &resultMap)
+	if err != nil {
+		logs.Error("CheckServer json exception -> ", err)
+		c.ErrorJson(500, "连接GoFastDfs服务失败!请检查服务地址是否正确,以及是否配置白名单!", nil)
+	}
+	logs.Info("CheckServer result -> ", resultMap)
+
+	if resultMap["status"] == commons.ApiStatusSuccess {
+		c.SuccessJson(resultMap)
+	}
+	c.ErrorJson(500, "连接GoFastDfs服务失败!请检查服务地址是否正确,以及是否配置白名单!", nil)
+}
+
+// DoInstall 安装
 func (c *InstallController) DoInstall() {
-	user := models.User{}
-	if err := c.ParseForm(&user); err != nil {
-		c.Data["json"] = &JsonData{Code: FAIL_CODE, Count: 0, Msg: "参数解析失败", Data: nil}
-		c.ServeJSON()
-		return
+	var install = form.Install{}
+	err := c.ParseForm(&install)
+	if err != nil {
+		c.ErrorJson(500, "param error", nil)
 	}
-	peers := models.Peers{}
-	if err := c.ParseForm(&peers); err != nil {
-		c.Data["json"] = &JsonData{Code: FAIL_CODE, Count: 0, Msg: "参数解析失败", Data: nil}
-		c.ServeJSON()
-		return
+	valid := validation.Validation{}
+	b, err := valid.Valid(&install)
+	if err != nil {
+		logs.Error("install -> ", err)
+		c.ErrorJson(500, "安装失败", nil)
 	}
-	id := models.SavePeer(peers)
-	peers.Id = id
-	user.Peers = &peers
-	md5 := md5.New()
-	uid := strings.ReplaceAll(uuid.NewV4().String(), "-", "")
-	md5.Write([]byte(user.Password))
-	md5.Write([]byte(uid))
-	st := md5.Sum(nil)
-	user.Password = hex.EncodeToString(st)
-	user.CredentialsSalt = uid
-	models.SaveUser(user)
-	c.Data["json"] = &JsonData{Code: SUCCESS_CODE, Count: 0, Msg: "安装成功", Data: nil}
-	c.ServeJSON()
+	if !b {
+		for _, err := range valid.Errors {
+			logs.Error("install -> ", err.Key, err.Message)
+			c.ErrorJson(500, err.Message, nil)
+		}
+	}
+
+	peers := install.GetPeers()
+	_, err = peers.Save()
+	if err == nil {
+		user := install.GetUser()
+		user.PeersId = peers.Id
+		_, err = user.Save()
+		if err == nil {
+			c.SuccessJson("安装成功")
+		}
+		c.ErrorJson(500, "安装失败", nil)
+	}
+	c.ErrorJson(500, "安装失败", nil)
 }

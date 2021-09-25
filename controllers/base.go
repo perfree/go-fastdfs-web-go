@@ -1,21 +1,90 @@
 package controllers
 
-import "github.com/astaxie/beego"
+import (
+	"github.com/astaxie/beego"
+	"go-fastdfs-web-go/models"
+)
 
 type BaseController struct {
 	beego.Controller
 }
 
-// 结果响应状态码:成功
-const SUCCESS_CODE = 0
+// ReturnMsg 定义统一结果集
+type ReturnMsg struct {
+	Code int
+	Msg  string
+	Data interface{}
+}
 
-// 结果响应状态码:失败
-const FAIL_CODE = 1
+// SuccessJson 成功
+func (b *BaseController) SuccessJson(data interface{}) {
 
-// 返回json列表 数据格式
-type JsonData struct {
-	Code  int         `json:"code"`  //错误代码
-	Msg   string      `json:"msg"`   //输出信息
-	Count int         `json:"total"` // 数据数量
-	Data  interface{} `json:"data"`  //数据
+	res := ReturnMsg{
+		200, "success", data,
+	}
+	b.Data["json"] = res
+	b.ServeJSON()
+	b.StopRun()
+}
+
+// ErrorJson 失败
+func (b *BaseController) ErrorJson(code int, msg string, data interface{}) {
+
+	res := ReturnMsg{
+		code, msg, data,
+	}
+
+	b.Data["json"] = res
+	b.ServeJSON()
+	b.StopRun()
+}
+
+// GetPeersUrl 获取PeersUrl
+func (b *BaseController) GetPeersUrl() (string, error) {
+	userId := b.GetSession("userId").(int)
+	user := models.User{}
+	user.Id = userId
+	user, err := user.GetById()
+
+	peers := models.Peers{}
+	if err != nil {
+		return "", err
+	}
+	peers.Id = user.PeersId
+	peers, err = peers.GetById()
+	if err != nil {
+		return "", err
+	}
+
+	if peers.GroupName != "" {
+		return peers.ServerAddress + "/" + peers.GroupName, err
+	}
+	return peers.ServerAddress, err
+}
+
+// GetPeers 获取Peers
+func (b *BaseController) GetPeers() (models.Peers, error) {
+	userId := b.GetSession("userId").(int)
+	user := models.User{}
+	user.Id = userId
+	user, err := user.GetById()
+
+	peers := models.Peers{}
+	if err != nil {
+		return peers, err
+	}
+	peers.Id = user.PeersId
+	peers, err = peers.GetById()
+	if err != nil {
+		return peers, err
+	}
+	return peers, err
+}
+
+// GetUser 获取当前用户
+func (b *BaseController) GetUser() (models.User, error) {
+	userId := b.GetSession("userId").(int)
+	user := models.User{}
+	user.Id = userId
+	return user.GetById()
 }

@@ -1,38 +1,52 @@
 package models
 
 import (
-	"fmt"
-	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
+	"time"
 )
 
-// 获取当前用户数
-func GetUsesTotal() (totalCount int64) {
-	o := orm.NewOrm()
-	totalCount, _ = o.QueryTable("user").Count()
-	return totalCount
+// User user table
+type User struct {
+	Id              int
+	Account         string    `orm:"size(64)"`
+	Password        string    `orm:"size(64)"`
+	Name            string    `orm:"size(64)"`
+	CredentialsSalt string    `orm:"size(64)"`
+	Email           string    `orm:"size(64);null"`
+	PeersId         int       `orm:"null"`
+	CreateTime      time.Time `orm:"auto_now_add;type(datetime)"`
+	UpdateTime      time.Time `orm:"type(datetime);null"`
 }
 
-// 获取所有用户信息
-func GetUsers() (messages []User) {
-	o := orm.NewOrm()
-	/*	TotalCount,_:=o.QueryTable("user").Count()
-		fmt.Println(TotalCount)*/
-	_, err := o.QueryTable("user").RelatedSel().All(&messages)
-
-	//_,err := o.Raw("SELECT * FROM `t_user` t1 left join `t_peers` t2 on t1.peersId = t2.id").QueryRows(&messages)
-	if err != nil {
-		logs.Error(err.Error())
-	}
-	return messages
+func init() {
+	orm.RegisterModel(new(User))
 }
 
-// 保存用户
-func SaveUser(user User) int64 {
-	o := orm.NewOrm()
-	id, err := o.Insert(&user)
-	if err != nil {
-		fmt.Println(err.Error())
-	}
-	return id
+// QueryUserCount 查询用户表数据量
+func (u *User) QueryUserCount() int64 {
+	n, _ := orm.NewOrm().QueryTable("user").Count()
+	return n
+}
+
+// Save 保存用户
+func (u *User) Save() (int64, error) {
+	return orm.NewOrm().Insert(u)
+}
+
+// GetByAccount 根据账户获取user
+func (u *User) GetByAccount() (User, error) {
+	err := orm.NewOrm().Read(u, "Account")
+	return *u, err
+}
+
+// GetById 根据id获取user
+func (u *User) GetById() (User, error) {
+	err := orm.NewOrm().Read(u, "Id")
+	return *u, err
+}
+
+// Update 更新用户
+func (u *User) Update() error {
+	_, err := orm.NewOrm().Update(u, "PeersId")
+	return err
 }

@@ -1,25 +1,9 @@
-## Go-FastDfs-Web的GoLang版本
+## GoFastDfsWeb - Golang版本
 
-> go-fastdfs是一个基于http协议的分布式文件系统，它基于大道至简的设计理念，一切从简设计，使得它的运维及扩展变得更加简单，它具有高性能、高可靠、无中心、免维护等优点。Go-FastDfs-Web为go-fastdfs的web平台,旨在方便用户管理查看go-fastdfs文件
 
-## 开发环境
-
-1. GoVersion ： 1.13.4
-2. Beego ： 1.12.0
-3. sqlite ： 3
-
-## 开发步骤
-
-```bash
-# 下载源码
-git clone https://github.com/perfree/go-fastdfs-web-go.git --depth 1
-# 下载依赖
-go mod download
-# 运行
-bee run # 或者直接运行main.go
-# 默认端口8080
-```
-如依赖下载失败则设置下代理:
-```bash
-go env -w GOPROXY=https://goproxy.io
-```
+## 开发环境配置
+1. 安装Golang(本项目基于v1.17.1开发)
+2. 安装beego `go get github.com/astaxie/beego`
+3. 安装bee `go get github.com/beego/bee`
+4. 安装gcc (自行百度, sqlite3需使用)
+5. Goland打开本项目,下载依赖包执行`bee run`或使用Goland运行即可

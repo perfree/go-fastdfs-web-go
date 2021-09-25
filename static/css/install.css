@@ -1,6 +1,5 @@
 html, body {
 	margin: 0;
-	height: auto;
 	min-height: 100%;
 	line-height: 1.42857143;
 	color: #58666e;
@@ -8,11 +7,41 @@ html, body {
 	-webkit-font-smoothing: antialiased;
 	font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB,
 		Microsoft YaHei, Arial, sans-serif;
+	background: #f1f1f1;
+	height: 100%;
+}
+.layui-fluid{
+	padding: 0;
 }
 .install-title{
-	text-align: center!important;
-	padding-top: 20px!important;
-	font-weight: bold!important;
-	font-size: 18px!important;
-	padding-right: 50px!important;
+	position: relative;
+	height: 260px;
+	line-height: 200px;
+	color: #fff;
+	border-radius: 2px 2px 0 0;
+	background-color: #627aad;
+	text-align: center;
+	font-weight: bold;
+	font-size: 18px;
+	padding-right: 50px;
+	padding-left: 56px;
+}
+#stepForm{
+	margin: 0 auto;
+	width: 800px!important;
+	height: 500px;
+	background-color: white!important;
+	padding-top: 50px;
+	position: absolute;
+	top: 130px;
+	left: calc(50% - 400px);
+	border-radius: 5px;
+	box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
+}
+.layui-card-body{
+	padding-top: 40px;
+	background: #ddd;
+}
+.layui-card {
+ box-shadow: none;
 }
