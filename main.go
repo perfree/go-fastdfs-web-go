@@ -11,7 +11,7 @@ import (
 
 func init() {
 	_ = orm.RegisterDriver("sqlite", orm.DRSqlite)
-	_ = orm.RegisterDataBase("default", "sqlite3", "./data/test.db")
+	_ = orm.RegisterDataBase("default", "sqlite3", "DataBase.db")
 	_ = orm.RunSyncdb("default", false, true)
 }
 
