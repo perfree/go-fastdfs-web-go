@@ -11,6 +11,10 @@ type BaseController struct {
 	beego.Controller
 }
 
+// Dao
+var peersDao = models.Peers{}
+var userDao = models.User{}
+
 // ReturnMsg 定义统一结果集
 type ReturnMsg struct {
 	Code int
@@ -44,16 +48,11 @@ func (b *BaseController) ErrorJson(code int, msg string, data interface{}) {
 // GetPeersUrl 获取PeersUrl
 func (b *BaseController) GetPeersUrl() (string, error) {
 	userId := b.GetSession("userId").(int)
-	user := models.User{}
-	user.Id = userId
-	user, err := user.GetById()
-
-	peers := models.Peers{}
+	user, err := userDao.GetById(userId)
 	if err != nil {
 		return "", err
 	}
-	peers.Id = user.PeersId
-	peers, err = peers.GetById()
+	peers, err := peersDao.GetById(user.PeersId)
 	if err != nil {
 		return "", err
 	}
@@ -67,16 +66,11 @@ func (b *BaseController) GetPeersUrl() (string, error) {
 // GetPeers 获取Peers
 func (b *BaseController) GetPeers() (models.Peers, error) {
 	userId := b.GetSession("userId").(int)
-	user := models.User{}
-	user.Id = userId
-	user, err := user.GetById()
-
-	peers := models.Peers{}
+	user, err := userDao.GetById(userId)
 	if err != nil {
-		return peers, err
+		return models.Peers{}, err
 	}
-	peers.Id = user.PeersId
-	peers, err = peers.GetById()
+	peers, err := peersDao.GetById(user.PeersId)
 	if err != nil {
 		return peers, err
 	}
@@ -87,8 +81,7 @@ func (b *BaseController) GetPeers() (models.Peers, error) {
 func (b *BaseController) GetUser() (models.User, error) {
 	userId := b.GetSession("userId").(int)
 	user := models.User{}
-	user.Id = userId
-	return user.GetById()
+	return user.GetById(userId)
 }
 
 // ValidParam 校验参数

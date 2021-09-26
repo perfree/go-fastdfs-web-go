@@ -5,7 +5,6 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
 	"go-fastdfs-web-go/commons"
-	"go-fastdfs-web-go/models"
 	"net/url"
 	"runtime"
 	"strconv"
@@ -156,8 +155,7 @@ func (c *HomeController) Repair() {
 
 // GetAllPeers 获取所有集群
 func (c *HomeController) GetAllPeers() {
-	peers := models.Peers{}
-	peersArr, err := peers.GetAllPeers()
+	peersArr, err := peersDao.GetAllPeers()
 	if err != nil {
 		logs.Error("获取所有集群出错", err)
 		c.ErrorJson(500, "获取数据失败", nil)
@@ -179,6 +177,6 @@ func (c *HomeController) SwitchPeers() {
 	user, _ := c.GetUser()
 	peersId, _ := strconv.Atoi(id)
 	user.PeersId = peersId
-	_ = user.Update()
+	_ = userDao.Update(user)
 	c.SuccessJson("更新成功")
 }

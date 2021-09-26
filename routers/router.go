@@ -9,6 +9,7 @@ func init() {
 	beego.Router("/", &controllers.SystemController{}, "get:Home")
 	beego.Router("/login", &controllers.SystemController{}, "get:Login")
 	beego.Router("/doLogin", &controllers.SystemController{}, "post:DoLogin")
+	beego.Router("/logout", &controllers.SystemController{}, "get:LogOut")
 
 	beego.Router("/install", &controllers.InstallController{})
 	beego.Router("/install/checkLocalServer", &controllers.InstallController{}, "get:CheckLocalServer")
@@ -28,5 +29,8 @@ func init() {
 	beego.Router("/peers/page", &controllers.PeersController{}, "get:PageList")
 	beego.Router("/peers/add", &controllers.PeersController{}, "get:AddPage")
 	beego.Router("/peers/doAdd", &controllers.PeersController{}, "post:DoAdd")
+	beego.Router("/peers/edit", &controllers.PeersController{}, "get:EditPage")
+	beego.Router("/peers/doEdit", &controllers.PeersController{}, "post:DoEdit")
+	beego.Router("/peers/del", &controllers.PeersController{}, "post:Del")
 
 }

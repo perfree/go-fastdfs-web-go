@@ -16,6 +16,7 @@ func init() {
 }
 
 func main() {
+	orm.Debug = true
 	_ = logs.SetLogger(logs.AdapterFile, `{"filename":"logs/go-fastDfs-web.log","level":6}`)
 	logs.EnableFuncCallDepth(true)
 	beego.InsertFilter("/*", beego.BeforeRouter, filters.InstallFilter)

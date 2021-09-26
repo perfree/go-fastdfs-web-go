@@ -34,7 +34,7 @@ func (c *SystemController) DoLogin() {
 		c.ErrorJson(500, "密码不能为空", nil)
 	}
 	password := user.Password
-	queryUser, err := user.GetByAccount()
+	queryUser, err := userDao.GetByAccount(user.Account)
 
 	if err != nil {
 		c.ErrorJson(500, "账户不存在", nil)
@@ -47,9 +47,15 @@ func (c *SystemController) DoLogin() {
 	user.Password = hex.EncodeToString(st)
 
 	if user.Password == queryUser.Password {
-		c.SetSession("userId", user.Id)
+		c.SetSession("userId", queryUser.Id)
 		c.SuccessJson("success")
 	}
 
 	c.ErrorJson(500, "密码错误", nil)
+}
+
+// LogOut 退出
+func (c *SystemController) LogOut() {
+	c.DelSession("userId")
+	c.Redirect("/login", 302)
 }

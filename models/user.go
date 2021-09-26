@@ -29,24 +29,26 @@ func (u *User) QueryUserCount() int64 {
 }
 
 // Save 保存用户
-func (u *User) Save() (int64, error) {
-	return orm.NewOrm().Insert(u)
+func (u *User) Save(user User) (int64, error) {
+	return orm.NewOrm().Insert(&user)
 }
 
 // GetByAccount 根据账户获取user
-func (u *User) GetByAccount() (User, error) {
-	err := orm.NewOrm().Read(u, "Account")
-	return *u, err
+func (u *User) GetByAccount(account string) (User, error) {
+	var user User
+	err := orm.NewOrm().Raw("select * from user where account = ?", account).QueryRow(&user)
+	return user, err
 }
 
 // GetById 根据id获取user
-func (u *User) GetById() (User, error) {
-	err := orm.NewOrm().Read(u, "Id")
-	return *u, err
+func (u *User) GetById(id int) (User, error) {
+	var user User
+	err := orm.NewOrm().Raw("select * from user where id = ?", id).QueryRow(&user)
+	return user, err
 }
 
 // Update 更新用户
-func (u *User) Update() error {
-	_, err := orm.NewOrm().Update(u, "PeersId")
+func (u *User) Update(user User) error {
+	_, err := orm.NewOrm().Update(&user, "PeersId")
 	return err
 }

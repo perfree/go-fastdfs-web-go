@@ -94,11 +94,11 @@ func (c *InstallController) DoInstall() {
 	c.ValidParam(&install, "安装失败")
 
 	peers := install.GetPeers()
-	_, err = peers.Save()
+	_, err = peersDao.Save(peers)
 	if err == nil {
 		user := install.GetUser()
 		user.PeersId = peers.Id
-		_, err = user.Save()
+		_, err = userDao.Save(user)
 		if err == nil {
 			c.SuccessJson("安装成功")
 		}

@@ -72,12 +72,12 @@
 			var data = obj.data;
 			if(obj.event === 'del'){
 				layer.confirm('确定要删除该集群吗?', function(index){
-					$.post("/peers/del",{"id":obj.data.id},function (data) {
-						if(data.code === 200){
+					$.post("/peers/del",{"id":obj.data.Id},function (data) {
+						if(data.Code === 200){
 							obj.del();
 							layer.msg("删除成功");
 						}else{
-							layer.msg(data.msg);
+							layer.msg(data.Msg);
 						}
 					})
 					layer.close(index);
@@ -89,7 +89,7 @@
 					title :'编辑集群',
 					shadeClose: true,
 					maxmin: true,
-					content: '/peers/edit?id='+obj.data.id
+					content: '/peers/edit?id='+obj.data.Id
 				});
 			}
 		});
