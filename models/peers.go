@@ -64,7 +64,7 @@ func (p *Peers) PageList(page string, limit string) commons.Pager {
 // CheckPeers 校验集群是否存在
 func (p *Peers) CheckPeers(serverAddress string) (Peers, error) {
 	var peers Peers
-	err := orm.NewOrm().Raw("select * from peers where serverAddress = ?", serverAddress).QueryRow(&peers)
+	err := orm.NewOrm().Raw("select * from peers where server_address = ?", serverAddress).QueryRow(&peers)
 	return peers, err
 }
 
