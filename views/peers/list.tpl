@@ -21,19 +21,7 @@
 		<div class="layui-col-md12" style="padding:5px;">
 			<div class="layui-card">
 				<div class="layui-card-body">
-					<table class="layui-table" lay-data="{url:'/peers/page', page:true, id:'peersList',toolbar:'#toolbar'}" lay-filter="peersList">
-						<thead>
-						<tr>
-							<th lay-data="{field:'Id', sort: true,align:'center'}">ID</th>
-							<th lay-data="{field:'Name',align:'center'}">名称</th>
-							<th lay-data="{field:'GroupName',align:'center'}">组名</th>
-							<th lay-data="{field:'ServerAddress',align:'center'}">管理地址</th>
-							<th lay-data="{field:'ShowAddress',align:'center'}">访问域名</th>
-							<th lay-data="{field:'CreateTime',align:'center'}">添加时间</th>
-							<th lay-data="{field:'right',toolbar: '#rightBar',width:150,align:'center'}">操作</th>
-						</tr>
-						</thead>
-					</table>
+					<table id="peersList" lay-filter="peersList"></table>
 				</div>
 			</div>
 		</div>
@@ -53,8 +41,23 @@
 <script>
 	layui.use(['table','laytpl'], function() {
 		var table = layui.table;
-		table.init('peersList', {
-			limit: 15,
+		//第一个实例
+		table.render({
+			elem: '#peersList',
+			url: '/peers/page',
+			page: true,
+			toolbar:'#toolbar',
+			cols: [[
+				{field: 'Id', title: 'ID', align:'center', sort: true, fixed: 'left'},
+				{field: 'Name', title: '名称', align:'center'},
+				{field: 'GroupName', title: '组名', align:'center'},
+				{field: 'ServerAddress', title: '管理地址', align:'center'},
+				{field: 'ShowAddress', title: '访问域名',align:'center'},
+				{field: 'CreateTime', title: '添加时间', align:'center', templet : function (res) {
+						return layui.util.toDateString(res.CreateTime, 'yyyy年MM月dd日 HH:mm:ss')
+				}},
+				{field: 'right', title: '操作', width: 150, align:'center', toolbar: '#rightBar'}
+			]],
 			response: {
 				statusName: 'State',
 				statusCode: 200,

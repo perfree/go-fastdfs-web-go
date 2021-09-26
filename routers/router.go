@@ -26,4 +26,7 @@ func init() {
 
 	beego.Router("/peers", &controllers.PeersController{}, "get:Index")
 	beego.Router("/peers/page", &controllers.PeersController{}, "get:PageList")
+	beego.Router("/peers/add", &controllers.PeersController{}, "get:AddPage")
+	beego.Router("/peers/doAdd", &controllers.PeersController{}, "post:DoAdd")
+
 }

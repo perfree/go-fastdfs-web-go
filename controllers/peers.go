@@ -23,3 +23,37 @@ func (c *PeersController) PageList() {
 	c.ServeJSON()
 	c.StopRun()
 }
+
+// AddPage 集群添加页
+func (c *PeersController) AddPage() {
+	c.TplName = "peers/add.tpl"
+}
+
+// DoAdd 添加集群
+func (c *PeersController) DoAdd() {
+	//var peersForm form.PeersForm
+	//err := c.ParseForm(&peersForm)
+	//if err != nil {
+	//	c.ErrorJson(500, "param error", nil)
+	//}
+	//valid := validation.Validation{}
+	//
+	//if valid.HasErrors() {
+	//	for _, err := range valid.Errors {
+	//		logs.Error(err.Key, err.Message)
+	//		c.ErrorJson(500, err.Message, nil)
+	//	}
+	//}
+	//
+	//peers, err := peersForm.CheckPeers()
+	//if err != nil && peers.ServerAddress != "" {
+	//	c.ErrorJson(500, "该集群已存在!", nil)
+	//}
+	//
+	//_, err = peersForm.Save()
+	//
+	//if err != nil{
+	//	c.ErrorJson(500, "添加失败!", nil)
+	//}
+	//c.SuccessJson(peersForm)
+}

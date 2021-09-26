@@ -59,3 +59,9 @@ func (peers *Peers) PageList(page string, limit string) commons.Pager {
 	pager.State = 200
 	return pager
 }
+
+// CheckPeers 校验集群是否存在
+func (peers *Peers) CheckPeers() (Peers, error) {
+	err := orm.NewOrm().Read(peers, "ServerAddress")
+	return *peers, err
+}
