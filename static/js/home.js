@@ -43,7 +43,7 @@ $('#switchPeers').click(function () {
                     layer.msg("请选择要切换的集群");
                 }else{
                     $.post('/home/switchPeers',{"id":switchPeersId}, function(result){
-                        if(result.code === 200){
+                        if(result.Code === 200){
                             layer.close(index);
                             layer.msg("切换成功", {icon: 6});
                             setTimeout(function(){

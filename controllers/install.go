@@ -3,12 +3,9 @@ package controllers
 import (
 	"encoding/json"
 	"github.com/astaxie/beego/logs"
-	"github.com/astaxie/beego/validation"
 	"go-fastdfs-web-go/commons"
 	"go-fastdfs-web-go/form"
-	"go-fastdfs-web-go/models"
 	"net/url"
-	"regexp"
 )
 
 var httpUtil = commons.HttpUtil{}
@@ -51,35 +48,12 @@ func (c *InstallController) CheckLocalServer() {
 
 // CheckServer 校验Server
 func (c *InstallController) CheckServer() {
-	var peers models.Peers
+	var peers form.PeersForm
 	err := c.ParseForm(&peers)
 	if err != nil {
 		c.ErrorJson(500, "param error", nil)
 	}
-	valid := validation.Validation{}
-	valid.Required(peers.Name, "Name").Message("集群名称不能为空且在50字以内")
-	valid.MaxSize(peers.Name, 50, "NameMax").Message("集群名称不能为空且在50字以内")
-
-	valid.MaxSize(peers.GroupName, 50, "GroupNameMax").Message("组名称应在50字以内")
-
-	valid.Required(peers.ServerAddress, "ServerAddress").Message("集群服务地址不能为空且在100字以内")
-	valid.MaxSize(peers.ServerAddress, 100, "ServerAddressMax").Message("集群服务地址不能为空且在100字以内")
-
-	valid.MaxSize(peers.ShowAddress, 100, "ShowAddressMax").Message("访问域名应在50字以内")
-
-	urlRegexp := regexp.MustCompile(`(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?`)
-	valid.Match(peers.ServerAddress, urlRegexp, "ServerAddressUrl").Message("请正确填写集群服务地址")
-
-	if peers.ShowAddress != "" {
-		valid.Match(peers.ShowAddress, urlRegexp, "ShowAddressUrl").Message("请正确填写访问域名")
-	}
-
-	if valid.HasErrors() {
-		for _, err := range valid.Errors {
-			logs.Error(err.Key, err.Message)
-			c.ErrorJson(500, err.Message, nil)
-		}
-	}
+	c.ValidParam(&peers, "安装失败")
 
 	// 拼装url
 	path := peers.ServerAddress
@@ -112,23 +86,12 @@ func (c *InstallController) CheckServer() {
 
 // DoInstall 安装
 func (c *InstallController) DoInstall() {
-	var install = form.Install{}
+	var install = form.InstallForm{}
 	err := c.ParseForm(&install)
 	if err != nil {
 		c.ErrorJson(500, "param error", nil)
 	}
-	valid := validation.Validation{}
-	b, err := valid.Valid(&install)
-	if err != nil {
-		logs.Error("install -> ", err)
-		c.ErrorJson(500, "安装失败", nil)
-	}
-	if !b {
-		for _, err := range valid.Errors {
-			logs.Error("install -> ", err.Key, err.Message)
-			c.ErrorJson(500, err.Message, nil)
-		}
-	}
+	c.ValidParam(&install, "安装失败")
 
 	peers := install.GetPeers()
 	_, err = peers.Save()

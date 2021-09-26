@@ -7,7 +7,7 @@ import (
 
 // User user table
 type User struct {
-	Id              int
+	Id              int       `orm:"AUTO_INCREMENT"`
 	Account         string    `orm:"size(64)"`
 	Password        string    `orm:"size(64)"`
 	Name            string    `orm:"size(64)"`

@@ -9,7 +9,7 @@ import (
 	"regexp"
 )
 
-type Install struct {
+type InstallForm struct {
 	Name          string
 	GroupName     string
 	ServerAddress string
@@ -21,7 +21,7 @@ type Install struct {
 }
 
 // GetUser 获取user
-func (install *Install) GetUser() models.User {
+func (install *InstallForm) GetUser() models.User {
 	user := models.User{}
 	user.Email = install.Email
 	user.Account = install.Account
@@ -38,7 +38,7 @@ func (install *Install) GetUser() models.User {
 }
 
 // GetPeers 获取Peers
-func (install *Install) GetPeers() models.Peers {
+func (install *InstallForm) GetPeers() models.Peers {
 	peers := models.Peers{}
 	peers.GroupName = install.GroupName
 	peers.ServerAddress = install.ServerAddress
@@ -48,7 +48,7 @@ func (install *Install) GetPeers() models.Peers {
 }
 
 // Valid 自定义校验
-func (install *Install) Valid(v *validation.Validation) {
+func (install *InstallForm) Valid(v *validation.Validation) {
 	v.Required(install.Name, "Name").Message("集群名称不能为空且在50字以内")
 	v.MaxSize(install.Name, 50, "NameMax").Message("集群名称不能为空且在50字以内")
 

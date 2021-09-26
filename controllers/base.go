@@ -2,6 +2,8 @@ package controllers
 
 import (
 	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/logs"
+	"github.com/astaxie/beego/validation"
 	"go-fastdfs-web-go/models"
 )
 
@@ -87,4 +89,20 @@ func (b *BaseController) GetUser() (models.User, error) {
 	user := models.User{}
 	user.Id = userId
 	return user.GetById()
+}
+
+// ValidParam 校验参数
+func (b *BaseController) ValidParam(obj interface{}, errMsg string) {
+	valid := validation.Validation{}
+	e, err := valid.Valid(obj)
+	if err != nil {
+		logs.Error("DoAdd -> ", err)
+		b.ErrorJson(500, errMsg, nil)
+	}
+	if !e {
+		for _, err := range valid.Errors {
+			logs.Error("DoAdd -> ", err.Key, err.Message)
+			b.ErrorJson(500, err.Message, nil)
+		}
+	}
 }

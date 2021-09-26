@@ -9,7 +9,7 @@ import (
 
 // Peers peers table
 type Peers struct {
-	Id            int
+	Id            int       `orm:"AUTO_INCREMENT"`
 	Name          string    `orm:"size(64);null"`
 	GroupName     string    `orm:"size(64);null"`
 	ServerAddress string    `orm:"size(64);null"`
