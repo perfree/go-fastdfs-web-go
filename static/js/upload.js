@@ -20,7 +20,7 @@ layui.use(['upload', 'element'], function () {
     //多文件上传
     var demoListView = $('#moreFileList'), uploadListIns = upload.render({
         elem: '#fileList',
-        url: '/file/upload/moreFileUpload',
+        url: '/file/upload/fileUpload',
         accept: 'file',
         multiple: true,
         auto: false,
@@ -82,13 +82,15 @@ layui.use(['upload', 'element'], function () {
             this.data = {'scene': scene, 'path': path, 'showUrl': showUrl};
         }, done: function (res, index, upload) {
             //上传成功
-            if (res.code === 200) {
+            if (res.Code === 200) {
                 var tr = demoListView.find('tr#upload-' + index), tds = tr.children();
                 tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
                 tds.eq(3).children(".layui-progress").children(".layui-progress-bar").attr("lay-percent", "100%");
                 //清空操作
                 tds.eq(4).html('');
-                tds.eq(4).html('<a class="layui-btn layui-btn-xs" target="_blank" onclick="showUrl(\'' + res.data.url + '\');">查看链接</a>');
+                if (res.Data !== null) {
+                    tds.eq(4).html('<a class="layui-btn layui-btn-xs" target="_blank" onclick="showUrl(\'' + res.Data.url + '\');">查看链接</a>');
+                }
                 //删除文件队列已经上传成功的文件
                 return delete this.files[index];
             } else {

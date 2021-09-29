@@ -67,7 +67,7 @@ $('#repair_stat').click(function () {
         index = layer.load();
         $.post("/home/repair_stat",function (data) {
             layer.close(index);
-            layer.msg(data.Data);
+            layer.msg(data.Msg);
             setTimeout(function(){
                 window.location.reload();
             }, 1000);
@@ -82,7 +82,7 @@ $('#remove_empty_dir').click(function () {
         index = layer.load();
         $.post("/home/remove_empty_dir",function (data) {
             layer.close(index);
-            layer.msg(data.Data);
+            layer.msg(data.Msg);
         })
     });
 })
@@ -94,7 +94,7 @@ $('#backup').click(function () {
         index = layer.load();
         $.post("/home/backup",function (data) {
             layer.close(index);
-            layer.msg(data.Data);
+            layer.msg(data.Msg);
         })
     });
 })
@@ -106,7 +106,7 @@ $('#repair').click(function () {
         index = layer.load();
         $.post("/home/repair",function (data) {
             layer.close(index);
-            layer.msg(data.Data);
+            layer.msg(data.Msg);
         })
     });
 })

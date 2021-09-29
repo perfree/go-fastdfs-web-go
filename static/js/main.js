@@ -44,7 +44,7 @@ function initEvent() {
     $(".f-support-btn").click(function () {
         let html = `
         <div style="text-align: center;font-size: 17px;font-weight: 900;">
-            <p style="margin-bottom: 10px;margin-top: 5px;">您的支持是我们最大的动力</p>
+            <p style="margin-bottom: 10px;margin-top: 5px;">您的支持是我最大的动力</p>
             <img src="/static/img/alipay.jpg">
             <img src="/static/img/wechat.jpg">
         </div>
